@@ -75,7 +75,14 @@ class LiteralnieFunGame(Gtk.Window):
         if self.game_over:
             return
         keyval = Gdk.keyval_name(event.keyval)
-
+        forbidden_chars = ['equal', 'backslash', 'Escape', 'grave', 'Tab', 'minus', 'bracketleft', 'bracketright',
+                           'apostrophe', 'semicolon', 'comma', 'period', 'slash', 'Left', 'Down', 'Up', 'Right', 'Home',
+                           'End', 'Delete',
+                           'Greek_pi', 'oe', 'eogonek', 'copyright', 'ssharp', 'leftarrow', 'downarrow', 'rightarrow',
+                           'oacute', 'thorn',
+                           'lstroke', 'ellipsis', 'rightsinglequotemark', 'eng', 'ae', 'eth', 'sacute', 'aogonek',
+                           'zabovedot', 'zacute',
+                           'cacute', 'doublelowquotemark', 'rightdoublequotemark', 'nacute', 'mu']
         if event.state & Gdk.ModifierType.MOD1_MASK:
             polish_letters = {
                 'a': 'Ą', 'c': 'Ć', 'e': 'Ę', 'l': 'Ł',
@@ -90,7 +97,7 @@ class LiteralnieFunGame(Gtk.Window):
         elif keyval in ['Return', 'KP_Enter']:
             self.check_word()
 
-        elif keyval.isalpha():
+        elif keyval.isalpha() and keyval not in forbidden_chars:
             letter = keyval.upper()
             self.set_letter(letter)
 
@@ -173,9 +180,6 @@ class LiteralnieFunGame(Gtk.Window):
                     self.buttons[self.current_row][i].get_style_context().remove_class("green")
                     self.buttons[self.current_row][i].get_style_context().remove_class("orange")
 
-        print(self.letters_good_position)
-        print(self.letters_bad_position)
-
     def is_valid_word(self, word):
         return word in self.valid_words
 
@@ -224,13 +228,19 @@ class LiteralnieFunGame(Gtk.Window):
         print(self.current_word)
 
     def show_help(self, widget):
-        self.show_message("Pomoc", "Wpisz dowolne pięcioliterowe słowo za pomocą klawiatury i naciśnij enter, by spróbować odgadnąć hasło.\n"
-                                   "Jeżeli pomylisz literę, możesz ją cofnąć za pomocą Backspace\n"
-                                   "Po każdej próbie, litery zostaną zaznaczone:\n"
-                                   "- na zielono, jeśli występuje w haśle w tym samym miejscu\n"
-                                   "- na żółto, jeśli występuje w haśle, ale w innym miejscu\n"
-                                   "- brak podświetlenia świadczy o braku występowania litery w końcowym haśle\n"
-                                   "Na odgadnięcie hasła masz 6 prób. Powodzenia!")
+        self.show_message("Pomoc",
+                          "Wpisz dowolne pięcioliterowe słowo za pomocą klawiatury i naciśnij enter, by spróbować odgadnąć hasło.\n"
+                          "Jeżeli pomylisz literę, możesz ją cofnąć za pomocą Backspace\n"
+                          "Polskie znaki koniecznie wpisuj z użyciem lewego ALT\n"
+                          "Po każdej próbie, litery zostaną zaznaczone:\n"
+                          "- na zielono, jeśli występuje w haśle w tym samym miejscu\n"
+                          "- na żółto, jeśli występuje w haśle, ale w innym miejscu\n"
+                          "- brak podświetlenia świadczy o braku występowania litery w końcowym haśle\n"
+                          "Na odgadnięcie hasła masz 6 prób.\n"
+                          "Jeżeli chcesz się sprawdzić w trudniejszym zadaniu, możesz włączyć tryb dla eksperta, "
+                          "który spowoduje, że dotychczas znalezione litery musisz użyć w kolejnym odgadywanym słowie. "
+                          "Jednak tryb ten możesz włączyć tylko na początku rozgrywki\n"
+                          "Powodzenia!")
 
 if __name__ == "__main__":
     css = b"""

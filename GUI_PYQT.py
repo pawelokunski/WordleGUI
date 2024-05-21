@@ -185,13 +185,19 @@ class LiteralnieFunGame(QWidget):
         print(self.current_word)
 
     def show_help(self):
-        self.show_message("Pomoc", "Wpisz dowolne pięcioliterowe słowo za pomocą klawiatury i naciśnij enter, by spróbować odgadnąć hasło.\n"
-                                   "Jeżeli pomylisz literę, możesz ją cofnąć za pomocą Backspace\n"
-                                   "Po każdej próbie, litery zostaną zaznaczone:\n"
-                                   "- na zielono, jeśli występuje w haśle w tym samym miejscu\n"
-                                   "- na żółto, jeśli występuje w haśle, ale w innym miejscu\n"
-                                   "- brak podświetlenia świadczy o braku występowania litery w końcowym haśle\n"
-                                   "Na odgadnięcie hasła masz 6 prób. Powodzenia!")
+        self.show_message("Pomoc",
+                         "Wpisz dowolne pięcioliterowe słowo za pomocą klawiatury i naciśnij enter, by spróbować odgadnąć hasło.\n"
+                         "Jeżeli pomylisz literę, możesz ją cofnąć za pomocą Backspace\n"
+                         "Polskie znaki koniecznie wpisuj z użyciem lewego ALT\n"
+                         "Po każdej próbie, litery zostaną zaznaczone:\n"
+                         "- na zielono, jeśli występuje w haśle w tym samym miejscu\n"
+                         "- na żółto, jeśli występuje w haśle, ale w innym miejscu\n"
+                         "- brak podświetlenia świadczy o braku występowania litery w końcowym haśle\n"
+                         "Na odgadnięcie hasła masz 6 prób.\n"
+                         "Jeżeli chcesz się sprawdzić w trudniejszym zadaniu, możesz włączyć tryb dla eksperta, "
+                         "który spowoduje, że dotychczas znalezione litery musisz użyć w kolejnym odgadywanym słowie. "
+                         "Jednak tryb ten możesz włączyć tylko na początku rozgrywki\n"
+                         "Powodzenia!")
 
 
 if __name__ == "__main__":
